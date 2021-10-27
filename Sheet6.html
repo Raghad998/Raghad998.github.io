@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<style>
+#e1 , #e2 , #e3 , #e4 {color:red;}
+
+</style>
+
+<title>Sheet 5</title>
+
+<script>
+
+function checkName(str) {
+var regEx = /^[A-Za-z]+$/;
+if (str.match(regEx)) {
+return true;
+}
+else {
+return false;
+}
+}
+
+
+function checkUser(str) {
+if (str.length > 0) {
+return true;
+}
+else {
+return false;
+}
+}
+
+function checkPass(pass, user) {
+var regEx2 = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
+if (pass.match(regEx2) && pass.length > 5 && pass.length < 11 && pass != user) {
+return true;
+}
+else {
+return false;
+}
+}
+
+function checkCpass(pass, Cpass) {
+if (pass = Cpass) {
+return true;
+}
+else {
+return false;
+}
+}
+
+function ValidateForm() {
+var name = document.getElementById("name").value;
+var user = document.getElementById("user").value;
+var pass = document.getElementById("pass").value;
+var Cpass = document.getElementById("Cpass").value;
+
+if (!checkName(name)) {
+
+document.getElementById("e1").innerHTML = "* Only letter is allowed";
+}
+
+if (!checkUser(user)) {
+document.getElementById("e2").innerHTML = "* username must be filed out";
+}
+
+if (!checkPass(pass, user)) {
+var error = "* your password Should be At least one small letter and one capital letter and one digit"
+document.getElementById("e3").innerHTML = error;
+}
+
+if (!checkCpass(Cpass, pass)) {
+document.getElementById("e4").innerHTML = "Your pass does not match";
+}
+
+if (checkName(name) && checkUser(user) && checkPass(pass, user) && checkCpass(Cpass, pass)) {
+document.getElementById("e5").innerHTML = "Your Enter is valid";
+}
+}
+
+</script>
+</head>
+
+
+<body>
+
+<h1> SIGN UP </h1>
+
+<form>
+<label for="Fname"> Full name: </label>
+<input type="text" id="name" name="name"><span id="e1"></span><br><br>
+
+<label for="username"> Use Name: </label>
+<input type="text" id="user" name="username"><span id="e2"></span><br><br>
+
+<label for="password">Password:</td>
+<input type="password" id="pass" name="password"><span id="e3"></span><br><br>
+
+<label for="password">Confirm Password:</label>
+<input type="password" id="Cpass" name="Cpass"><span id="e4"></span><br><br>
+
+<input type="button" onclick="ValidateForm()" value="SIGN UP">
+</form>
+<p id="e5"></p>
+
+</body>
+</html>
